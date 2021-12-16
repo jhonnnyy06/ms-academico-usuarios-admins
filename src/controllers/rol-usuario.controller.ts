@@ -26,7 +26,7 @@ export class RolUsuarioController {
     @repository(RolRepository) protected rolRepository: RolRepository,
   ) { }
 
-  @get('/rols/{_id}/usuarios', {
+  @get('/roles/{_id}/usuarios', {
     responses: {
       '200': {
         description: 'Array of Rol has many Usuario',
@@ -42,10 +42,10 @@ export class RolUsuarioController {
     @param.path.string('_id') _id: string,
     @param.query.object('filter') filter?: Filter<Usuario>,
   ): Promise<Usuario[]> {
-    return this.rolRepository.esta_asociado(_id).find(filter);
+    return this.rolRepository.usuarios(_id).find(filter);
   }
 
-  @post('/rols/{_id}/usuarios', {
+  @post('/roles/{_id}/usuarios', {
     responses: {
       '200': {
         description: 'Rol model instance',
@@ -67,10 +67,10 @@ export class RolUsuarioController {
       },
     }) usuario: Omit<Usuario, '_id'>,
   ): Promise<Usuario> {
-    return this.rolRepository.esta_asociado(_id).create(usuario);
+    return this.rolRepository.usuarios(_id).create(usuario);
   }
 
-  @patch('/rols/{_id}/usuarios', {
+  @patch('/roles/{_id}/usuarios', {
     responses: {
       '200': {
         description: 'Rol.Usuario PATCH success count',
@@ -90,10 +90,10 @@ export class RolUsuarioController {
     usuario: Partial<Usuario>,
     @param.query.object('where', getWhereSchemaFor(Usuario)) where?: Where<Usuario>,
   ): Promise<Count> {
-    return this.rolRepository.esta_asociado(_id).patch(usuario, where);
+    return this.rolRepository.usuarios(_id).patch(usuario, where);
   }
 
-  @del('/rols/{_id}/usuarios', {
+  @del('/roles/{_id}/usuarios', {
     responses: {
       '200': {
         description: 'Rol.Usuario DELETE success count',
@@ -105,6 +105,6 @@ export class RolUsuarioController {
     @param.path.string('id') _id: string,
     @param.query.object('where', getWhereSchemaFor(Usuario)) where?: Where<Usuario>,
   ): Promise<Count> {
-    return this.rolRepository.esta_asociado(_id).delete(where);
+    return this.rolRepository.usuarios(_id).delete(where);
   }
 }

@@ -10,13 +10,13 @@ export class RolRepository extends DefaultCrudRepository<
   RolRelations
 > {
 
-  public readonly esta_asociado: HasManyRepositoryFactory<Usuario, typeof Rol.prototype._id>;
+  public readonly usuarios: HasManyRepositoryFactory<Usuario, typeof Rol.prototype._id>;
 
   constructor(
     @inject('datasources.mongodb') dataSource: MongodbDataSource, @repository.getter('UsuarioRepository') protected usuarioRepositoryGetter: Getter<UsuarioRepository>,
   ) {
     super(Rol, dataSource);
-    this.esta_asociado = this.createHasManyRepositoryFactoryFor('esta_asociado', usuarioRepositoryGetter,);
-    this.registerInclusionResolver('esta_asociado', this.esta_asociado.inclusionResolver);
+    this.usuarios = this.createHasManyRepositoryFactoryFor('usuarios', usuarioRepositoryGetter,);
+    this.registerInclusionResolver('usuarios', this.usuarios.inclusionResolver);
   }
 }

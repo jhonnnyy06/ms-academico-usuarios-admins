@@ -17,7 +17,7 @@ export class Rol extends Entity {
   nombre: string;
 
   @hasMany(() => Usuario, {keyTo: 'id_rol'})
-  esta_asociado: Usuario[];
+  usuarios: Usuario[];
 
   constructor(data?: Partial<Rol>) {
     super(data);
